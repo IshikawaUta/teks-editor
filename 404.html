@@ -1,0 +1,90 @@
+---
+permalink: /404.html
+layout: null
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | DevStudio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style type="text/css" media="screen">
+        :root {
+            --bg-main: #dadada;
+            --bg-panel: #c46cdf;
+            --text-color: #ffffff;
+            --accent: #b9b9b9;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: var(--bg-panel);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 6em;
+            font-family: 'Fira Code', monospace;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 20px 0;
+            opacity: 0.8;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(198, 120, 221, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>404</h1>
+    <p><strong>Oops! Halaman tidak ditemukan.</strong></p>
+    <p>Sepertinya kode yang Anda cari tidak ada di repositori ini.</p>
+    
+    <a href="{{ site.baseurl }}/" class="btn-home">
+        <i class="fas fa-home"></i> Kembali ke Editor
+    </a>
+</div>
+
+</body>
+</html>

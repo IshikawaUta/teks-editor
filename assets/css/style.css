@@ -1,0 +1,331 @@
+/* 1. Variabel Global & Tema */
+:root {
+    /* Glassmorphism Dark - Cyan Glow */
+    --bg-main: #0a0a12;
+    --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    --bg-panel: rgba(255, 255, 255, 0.03);
+    --text-color: #e0e0e0;
+    --accent: #00f2ff;
+    --accent-glow: rgba(0, 242, 255, 0.5);
+    --glass: rgba(255, 255, 255, 0.07);
+    --border: rgba(255, 255, 255, 0.12);
+    --console-bg: rgba(0, 0, 0, 0.4);
+    --glass-blur: blur(15px);
+}
+
+[data-theme="light"] {
+    /* Glassmorphism Light - Royal Purple */
+    --bg-main: #f5f7fa;
+    --bg-gradient: linear-gradient(135deg, #e0eafc, #cfdef3);
+    --bg-panel: rgba(255, 255, 255, 0.4);
+    --text-color: #2d3436;
+    --accent: #7d5fff;
+    --accent-glow: rgba(125, 95, 255, 0.4);
+    --glass: rgba(0, 0, 0, 0.03);
+    --border: rgba(255, 255, 255, 0.6);
+    --console-bg: rgba(255, 255, 255, 0.3);
+}
+
+/* 2. Reset & Base Styles */
+* { 
+    box-sizing: border-box; 
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    height: 100vh;
+    overflow: hidden;
+    transition: background 0.5s ease;
+}
+
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* 3. Toolbar Glass Style */
+.toolbar {
+    height: 60px;
+    background: var(--bg-panel) !important;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+}
+
+.brand { 
+    font-size: 1.1rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.brand i { 
+    color: var(--accent); 
+    text-shadow: 0 0 10px var(--accent-glow); 
+    animation: pulse 2s infinite; 
+}
+
+/* 4. Workspace & Panels */
+.workspace {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex: 1;
+    overflow: hidden;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-panel) !important;
+    backdrop-filter: var(--glass-blur);
+}
+
+/* 5. Tabs & Animations */
+.tabs {
+    display: flex;
+    padding-top: 5px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(0,0,0,0.1);
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    opacity: 0.6;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+    opacity: 1;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    background: var(--glass);
+}
+
+.tab-btn:hover { 
+    opacity: 1; 
+}
+
+/* Editor Animation */
+@keyframes editorFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.editor-animate {
+    animation: editorFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#editor-wrapper, .CodeMirror {
+    flex: 1;
+    background: transparent !important;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+}
+
+/* 6. Preview & Console HUD */
+.preview-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #fff; /* White background for web standards */
+}
+
+#output-frame {
+    flex: 1;
+    width: 100%;
+    border: none;
+}
+
+#console-panel {
+    height: 180px;
+    background: var(--console-bg) !important;
+    backdrop-filter: blur(20px);
+    border-top: 2px solid var(--accent);
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+}
+
+.console-header {
+    padding: 8px 15px;
+    background: rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--accent);
+    text-shadow: 0 0 5px var(--accent-glow);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#console-logs {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    font-family: 'Fira Code', monospace;
+    font-size: 12px;
+}
+
+.log-item {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    word-break: break-all;
+}
+
+.log-info { 
+    color: #00ff95; 
+    text-shadow: 0 0 3px rgba(0, 255, 149, 0.3); 
+}
+
+.log-error { 
+    color: #ff4757; 
+    border-left: 3px solid #ff4757; 
+    padding-left: 10px; 
+}
+
+/* 7. Buttons & UI Neon */
+.btn-primary {
+    background: var(--accent);
+    color: #000 !important;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px var(--accent-glow);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px var(--accent);
+}
+
+.btn-icon {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    color: var(--text-color);
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-icon:hover {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 0 10px var(--accent-glow);
+    transform: translateY(-2px);
+}
+
+.btn-clear {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-color);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 8. Advanced Loading Overlay */
+#loading-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 18, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    backdrop-filter: blur(8px);
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid transparent;
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    position: relative;
+    animation: spin 1s linear infinite;
+}
+
+.spinner::before {
+    content: "";
+    position: absolute;
+    top: 5px; left: 5px; right: 5px; bottom: 5px;
+    border: 3px solid transparent;
+    border-top-color: #ff00ff;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite reverse;
+}
+
+/* 9. Fullscreen Mode & Utilities */
+.hidden { 
+    display: none !important; 
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 50% { opacity: 0.5; } }
+
+.fullscreen-mode {
+    position: fixed !important;
+    inset: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999;
+    background: var(--bg-panel);
+    display: flex;
+    flex-direction: column;
+}
+
+.fullscreen-mode #output-frame {
+    flex: 1;
+    background: white;
+}
+
+.fullscreen-mode #console-panel {
+    display: flex;
+    height: 200px; 
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}

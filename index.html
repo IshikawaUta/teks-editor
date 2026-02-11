@@ -1,0 +1,104 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevStudio | IshikawaUta</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/theme/neo.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+
+<div class="editor-container">
+    <header class="toolbar">
+        <div class="brand">
+            <i class="fas fa-terminal"></i>
+            <span>DevStudio <strong>By: IshikawaUta</strong></span>
+        </div>
+        <div class="actions">
+            <button id="theme-toggle" class="btn-icon" title="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="share-btn" class="btn-icon" title="Share Project">
+                <i class="fas fa-share-alt"></i>
+            </button>
+            <button id="download-btn" class="btn-icon" title="Download HTML">
+                <i class="fas fa-download"></i>
+            </button>
+            <button id="reset-btn" class="btn-icon" title="Reset All Code">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+            <button id="run-btn" class="btn-primary">
+                <i class="fas fa-play"></i> Run
+            </button>
+        </div>
+    </header>
+
+    <main class="workspace">
+        <section class="panel editor-panel">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('html', event)">
+                    <i class="fab fa-html5"></i> index.html
+                </button>
+                <button class="tab-btn" onclick="switchTab('css', event)">
+                    <i class="fab fa-css3-alt"></i> style.css
+                </button>
+                <button class="tab-btn" onclick="switchTab('js', event)">
+                    <i class="fab fa-js"></i> script.js
+                </button>
+            </div>
+            <div id="editor-wrapper"></div>
+        </section>
+        
+        <section class="panel preview-panel">
+            <div class="console-header" style="background: var(--bg-panel); border-bottom: 1px solid var(--border); padding: 10px 15px;">
+                <span style="color: var(--accent); font-weight: 600; font-size: 12px; text-transform: uppercase;">
+                    <i class="fas fa-eye"></i> Live Preview
+                </span>
+                <button id="fullscreen-btn" class="btn-icon" style="width: 28px; height: 28px; font-size: 12px;" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+            
+            <div class="preview-content">
+                <div id="loading-overlay" class="hidden">
+                    <div class="spinner"></div>
+                </div>
+                
+                <iframe id="output-frame" sandbox="allow-scripts allow-same-origin"></iframe>
+                
+                <div id="console-panel">
+                    <div class="console-header">
+                        <span><i class="fas fa-terminal"></i> Console Output</span>
+                        <button onclick="clearConsole()" class="btn-clear">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                    </div>
+                    <div id="console-logs"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/xml/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/javascript/javascript.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/edit/closebrackets.min.js"></script>
+
+<script src="{{ '/assets/js/editor.js' | relative_url }}"></script>
+
+</body>
+</html>

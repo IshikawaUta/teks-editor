@@ -1,0 +1,7 @@
+title: DevStudio 2026
+email: komikers09@gmail.com
+description: Modern Web Code Editor with Jekyll
+baseurl: "/teks-editor" 
+url: "https://ishikawauta.github.io"
+markdown: kramdown
+exclude: [Gemfile, Gemfile.lock]
